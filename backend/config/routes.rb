@@ -12,6 +12,10 @@ Rails.application.routes.draw do
       resources :countries, only: :index
       resources :departments, only: :index
       resources :job_titles, only: :index
+
+      get "insights/summary", to: "insights#summary"
+      get "insights/countries", to: "insights#countries"
+      get "insights/job_titles", to: "insights#job_titles"
     end
   end
 end
