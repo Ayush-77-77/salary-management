@@ -4,7 +4,8 @@ module Api
       before_action :set_employee, only: %i[show update destroy]
 
       def index
-        employees = EmployeeSearch.new(query: search_params, page: params[:page], per_page: params[:per_page]).call
+        search = search_params
+        employees = EmployeeSearch.new(query: search.fetch(:q, {}), page: search[:page], per_page: search[:per_page]).call
 
         render json: EmployeeSerializer.render(employees, root: :employees, meta: pagination_meta(employees))
       end
@@ -42,7 +43,7 @@ module Api
       end
 
       def search_params
-        params.fetch(:q, {}).permit(:full_name_or_email_i_cont, :country_id_eq, :department_id_eq, :job_title_eq, :s)
+        params.permit(:page, :per_page, q: %i[full_name_or_email_i_cont country_id_eq department_id_eq job_title_eq s])
       end
 
       def pagination_meta(collection)

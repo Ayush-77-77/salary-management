@@ -45,6 +45,15 @@ RSpec.describe "Api::V1::Employees", type: :request do
       expect(response.parsed_body["employees"].map { |employee| employee["full_name"] }).to eq([ "Asha Rao" ])
     end
 
+    it "ignores a search param that is not a hash" do
+      create(:employee, country:, department:)
+
+      get "/api/v1/employees", params: { q: "asha" }, headers: headers
+
+      expect(response).to have_http_status(:ok)
+      expect(response.parsed_body["meta"]["total_count"]).to eq(1)
+    end
+
     it "runs the same number of queries regardless of page size" do
       create_list(:employee, 2)
       small_page = count_queries { get "/api/v1/employees", headers: headers }

@@ -9,16 +9,24 @@ class EmployeeSearch
 
   def call
     search = Employee.ransack(query)
-    search.sorts = DEFAULT_SORT if search.sorts.empty?
+    search.sorts = DEFAULT_SORT if search.sorts.none? { |sort| sortable?(sort) }
 
     search.result
           .includes(:country, :department)
           .order(:id)
           .page(page)
-          .per(per_page)
+          .per(page_size)
   end
 
   private
 
   attr_reader :query, :page, :per_page
+
+  def sortable?(sort)
+    Employee.ransortable_attributes.include?(sort.name)
+  end
+
+  def page_size
+    per_page if per_page.to_i.positive?
+  end
 end

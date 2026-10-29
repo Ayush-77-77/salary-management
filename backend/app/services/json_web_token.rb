@@ -7,7 +7,6 @@ class JsonWebToken
       JWT.encode(payload.merge(exp: expires_at.to_i), secret, ALGORITHM)
     end
 
-    # Returns the payload hash, or nil if the token is invalid or expired.
     def decode(token)
       JWT.decode(token, secret, true, algorithm: ALGORITHM).first
     rescue JWT::DecodeError

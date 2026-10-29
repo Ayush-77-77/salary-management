@@ -6,6 +6,10 @@ RSpec.describe EmployeeSearch do
   let(:engineering) { create(:department, name: "Engineering") }
   let(:sales) { create(:department, name: "Sales") }
 
+  let!(:carla) do
+    create(:employee, full_name: "Carla Diaz", email: "carla@acme.test", country: usa, department: engineering,
+                      job_title: "Software Engineer", salary: 150_000, hire_date: Date.new(2023, 1, 10))
+  end
   let!(:asha) do
     create(:employee, full_name: "Asha Rao", email: "asha@acme.test", country: india, department: engineering,
                       job_title: "Software Engineer", salary: 2_400_000, hire_date: Date.new(2021, 3, 1))
@@ -13,10 +17,6 @@ RSpec.describe EmployeeSearch do
   let!(:bob) do
     create(:employee, full_name: "Bob Smith", email: "bob@acme.test", country: usa, department: sales,
                       job_title: "Account Executive", salary: 90_000, hire_date: Date.new(2019, 6, 1))
-  end
-  let!(:carla) do
-    create(:employee, full_name: "Carla Diaz", email: "carla@acme.test", country: usa, department: engineering,
-                      job_title: "Software Engineer", salary: 150_000, hire_date: Date.new(2023, 1, 10))
   end
 
   def search(query = {}, pagination = {})
@@ -95,6 +95,13 @@ RSpec.describe EmployeeSearch do
 
       expect(result.current_page).to eq(1)
       expect(result.limit_value).to eq(25)
+    end
+
+    it "uses the default page size for zero" do
+      result = search({}, per_page: "0")
+
+      expect(result.limit_value).to eq(25)
+      expect(result.total_pages).to eq(1)
     end
   end
 

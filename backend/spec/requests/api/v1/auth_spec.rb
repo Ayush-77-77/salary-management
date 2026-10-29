@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe "Api::V1::Auth", type: :request do
   let!(:user) { create(:user, email: "hr@acme.test", password: "password123") }
 
+  before { Rails.cache.clear }
+
   describe "POST /api/v1/auth/login" do
     it "returns a token and the user for valid credentials" do
       post "/api/v1/auth/login", params: { email: "HR@acme.test", password: "password123" }
@@ -24,6 +26,15 @@ RSpec.describe "Api::V1::Auth", type: :request do
 
       expect(response).to have_http_status(:unauthorized)
       expect(response.parsed_body["errors"]).to eq([ "Invalid email or password" ])
+    end
+
+    it "blocks further attempts after 10 logins in a minute" do
+      10.times { post "/api/v1/auth/login", params: { email: "hr@acme.test", password: "wrong-password" } }
+
+      post "/api/v1/auth/login", params: { email: "hr@acme.test", password: "password123" }
+
+      expect(response).to have_http_status(:too_many_requests)
+      expect(response.parsed_body["errors"]).to eq([ "Too many login attempts. Try again later." ])
     end
   end
 
