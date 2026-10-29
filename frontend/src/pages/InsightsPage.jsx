@@ -63,13 +63,14 @@ export default function InsightsPage() {
     { title: 'Job title', dataIndex: 'job_title' },
     ...salaryColumns(currency),
     {
-      title: 'Average vs. top-paid role',
+      title: '% of highest-paid role',
       key: 'comparison',
       width: 220,
       render: (_, row) => (
         <Progress
           percent={Math.round((Number(row.average_salary) / highestAverage) * 100)}
-          showInfo={false}
+          status="normal"
+          format={(percent) => `${percent}%`}
           size="small"
         />
       ),

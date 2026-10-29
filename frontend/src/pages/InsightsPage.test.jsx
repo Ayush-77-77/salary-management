@@ -31,7 +31,10 @@ describe('InsightsPage', () => {
     ])
     fetchJobTitleStats.mockImplementation(async (countryId) =>
       countryId === india.country_id
-        ? jobTitlesFor(india, [{ job_title: 'Engineering Manager', ...stats(184, '3607700.0', '4648067.4', '5619300.0') }])
+        ? jobTitlesFor(india, [
+            { job_title: 'Engineering Manager', ...stats(184, '3607700.0', '4648067.4', '5619300.0') },
+            { job_title: 'Senior Software Engineer', ...stats(183, '3003800.0', '3882048.1', '4680200.0') },
+          ])
         : jobTitlesFor(usa, [{ job_title: 'Account Executive', ...stats(390, '64000.0', '80100.0', '100000.0') }]),
     )
   })
@@ -59,6 +62,16 @@ describe('InsightsPage', () => {
     expect(await screen.findByText('Engineering Manager')).toBeInTheDocument()
     expect(screen.getByText('INR 4,648,067')).toBeInTheDocument()
     expect(fetchJobTitleStats).toHaveBeenCalledWith(india.country_id, expect.any(AbortSignal))
+  })
+
+  it('shows each role as a percentage of the highest-paid role', async () => {
+    render(<InsightsPage />)
+
+    const managerRow = (await screen.findByRole('cell', { name: 'Engineering Manager' })).closest('tr')
+    const seniorRow = screen.getByRole('cell', { name: 'Senior Software Engineer' }).closest('tr')
+
+    expect(within(managerRow).getByText('100%')).toBeInTheDocument()
+    expect(within(seniorRow).getByText('84%')).toBeInTheDocument()
   })
 
   it('switches the drill-down to the chosen country', async () => {
