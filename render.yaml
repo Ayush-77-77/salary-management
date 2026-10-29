@@ -25,7 +25,7 @@ services:
       - key: HTTP_PORT
         value: 10000
       - key: FRONTEND_ORIGINS
-        value: https://salary-management-web.onrender.com
+        value: https://salary-management-web-fwb5.onrender.com
 
   - type: web
     name: salary-management-web
@@ -39,6 +39,6 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        value: https://salary-management-api.onrender.com
+        value: https://salary-management-api-cu2z.onrender.com
       - key: NODE_VERSION
         value: "26"
