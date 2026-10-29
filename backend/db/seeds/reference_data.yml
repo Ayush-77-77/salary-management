@@ -1,0 +1,101 @@
+countries:
+  - name: United States
+    code: US
+    currency: USD
+    salary_factor: 1.0
+    weight: 25
+    first_names: [James, Mary, Robert, Patricia, John, Jennifer, Michael, Linda, David, Elizabeth, William, Susan, Daniel, Jessica, Matthew]
+    last_names: [Smith, Johnson, Williams, Brown, Jones, Miller, Davis, Wilson, Anderson, Taylor, Thomas, Moore, Jackson, Martin, Lee]
+  - name: India
+    code: IN
+    currency: INR
+    salary_factor: 25.0
+    weight: 25
+    first_names: [Aarav, Priya, Rohan, Ananya, Vikram, Sneha, Arjun, Kavya, Rahul, Isha, Karan, Pooja, Aditya, Neha, Siddharth]
+    last_names: [Sharma, Verma, Gupta, Patel, Reddy, Iyer, Nair, Singh, Mehta, Joshi, Kapoor, Rao, Das, Kumar, Chopra]
+  - name: United Kingdom
+    code: GB
+    currency: GBP
+    salary_factor: 0.65
+    weight: 12
+    first_names: [Oliver, Amelia, Harry, Isla, George, Ava, Jack, Emily, Charlie, Sophie, Thomas, Grace, Oscar, Lily, Henry]
+    last_names: [Clarke, Evans, Hughes, Walker, Wright, Robinson, Thompson, White, Edwards, Green, Hall, Wood, Harris, Lewis, Turner]
+  - name: Germany
+    code: DE
+    currency: EUR
+    salary_factor: 0.7
+    weight: 10
+    first_names: [Lukas, Anna, Leon, Mia, Felix, Hannah, Jonas, Lena, Paul, Laura, Max, Sophie, Noah, Marie, Elias]
+    last_names: [Mueller, Schmidt, Schneider, Fischer, Weber, Meyer, Wagner, Becker, Schulz, Hoffmann, Koch, Richter, Klein, Wolf, Neumann]
+  - name: Canada
+    code: CA
+    currency: CAD
+    salary_factor: 1.05
+    weight: 8
+    first_names: [Liam, Olivia, Ethan, Emma, Lucas, Chloe, Benjamin, Charlotte, Logan, Abigail, Nathan, Madison, Owen, Ella, Ryan]
+    last_names: [Tremblay, Gagnon, Roy, Cote, Bouchard, Gauthier, Morin, Lavoie, Fortin, Campbell, Stewart, MacDonald, Young, King, Scott]
+  - name: Brazil
+    code: BR
+    currency: BRL
+    salary_factor: 2.2
+    weight: 8
+    first_names: [Gabriel, Julia, Rafael, Beatriz, Pedro, Larissa, Mateus, Camila, Gustavo, Mariana, Felipe, Fernanda, Bruno, Leticia, Thiago]
+    last_names: [Silva, Santos, Oliveira, Souza, Lima, Pereira, Costa, Ferreira, Almeida, Ribeiro, Carvalho, Gomes, Martins, Rocha, Barbosa]
+  - name: Singapore
+    code: SG
+    currency: SGD
+    salary_factor: 1.1
+    weight: 6
+    first_names: [Wei, Hui, Jun, Mei, Ming, Ling, Kai, Xin, Hao, Yan, Jie, Shu, Rui, Ying, Zhi]
+    last_names: [Tan, Lim, Lee, Ng, Ong, Wong, Goh, Chua, Chan, Koh, Teo, Ang, Yeo, Tay, Ho]
+  - name: Australia
+    code: AU
+    currency: AUD
+    salary_factor: 1.15
+    weight: 6
+    first_names: [Jack, Charlotte, William, Olivia, Noah, Mia, Thomas, Chloe, James, Isla, Lachlan, Ruby, Cooper, Zoe, Riley]
+    last_names: [Smith, Jones, Williams, Brown, Wilson, Taylor, Johnson, White, Martin, Anderson, Thompson, Nguyen, Ryan, Kelly, Walsh]
+
+departments:
+  - name: Engineering
+    weight: 35
+    job_titles:
+      Software Engineer: 110000
+      Senior Software Engineer: 150000
+      Engineering Manager: 180000
+      QA Engineer: 85000
+      DevOps Engineer: 120000
+  - name: Product
+    weight: 8
+    job_titles:
+      Product Manager: 130000
+      Product Designer: 105000
+  - name: Sales
+    weight: 15
+    job_titles:
+      Account Executive: 80000
+      Sales Manager: 120000
+  - name: Marketing
+    weight: 8
+    job_titles:
+      Marketing Specialist: 70000
+      Marketing Manager: 110000
+  - name: Finance
+    weight: 7
+    job_titles:
+      Accountant: 70000
+      Financial Analyst: 85000
+  - name: Human Resources
+    weight: 6
+    job_titles:
+      HR Generalist: 65000
+      Recruiter: 70000
+  - name: Customer Support
+    weight: 15
+    job_titles:
+      Support Specialist: 50000
+      Support Team Lead: 70000
+  - name: Operations
+    weight: 6
+    job_titles:
+      Operations Analyst: 75000
