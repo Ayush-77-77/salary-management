@@ -1,4 +1,6 @@
 class Country < ApplicationRecord
+  has_many :employees, dependent: :restrict_with_error
+
   normalizes :name, with: ->(name) { name.squish }
   normalizes :code, :currency, with: ->(value) { value.strip.upcase }
 
