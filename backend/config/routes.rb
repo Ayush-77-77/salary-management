@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       get "auth/me", to: "auth#me"
 
       resources :employees, only: %i[index show create update destroy]
+      resources :countries, only: :index
+      resources :departments, only: :index
+      resources :job_titles, only: :index
     end
   end
 end
