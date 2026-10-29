@@ -1,27 +1,10 @@
-import axios from 'axios'
-import { useCallback, useEffect, useState } from 'react'
-import { errorMessages } from '../api/client'
+import { useCallback } from 'react'
 import { fetchEmployees } from '../api/employees'
+import useRequest from './useRequest'
 
 export default function useEmployees(query) {
-  const [reloadCount, setReloadCount] = useState(0)
-  const [result, setResult] = useState({ query: null, reloadCount: null, employees: [], meta: null, error: null })
+  const request = useCallback((signal) => fetchEmployees(query, { signal }), [query])
+  const { data, error, loading, reload } = useRequest(request)
 
-  useEffect(() => {
-    const controller = new AbortController()
-
-    fetchEmployees(query, { signal: controller.signal })
-      .then(({ employees, meta }) => setResult({ query, reloadCount, employees, meta, error: null }))
-      .catch((error) => {
-        if (axios.isCancel(error)) return
-        setResult((previous) => ({ ...previous, query, reloadCount, error: errorMessages(error).join(', ') }))
-      })
-
-    return () => controller.abort()
-  }, [query, reloadCount])
-
-  const reload = useCallback(() => setReloadCount((count) => count + 1), [])
-  const loading = result.query !== query || result.reloadCount !== reloadCount
-
-  return { employees: result.employees, meta: result.meta, error: result.error, loading, reload }
+  return { employees: data?.employees ?? [], meta: data?.meta ?? null, error, loading, reload }
 }
