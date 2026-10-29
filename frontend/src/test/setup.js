@@ -16,6 +16,12 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
+window.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
 afterEach(() => {
   cleanup()
   localStorage.clear()
