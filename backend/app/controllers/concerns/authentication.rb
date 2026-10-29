@@ -13,7 +13,7 @@ module Authentication
     payload = JsonWebToken.decode(bearer_token.to_s)
     @current_user = User.find_by(id: payload["user_id"]) if payload
 
-    render json: { errors: [ "Unauthorized" ] }, status: :unauthorized unless current_user
+    render_errors("Unauthorized", :unauthorized) unless current_user
   end
 
   def bearer_token

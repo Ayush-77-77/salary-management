@@ -9,7 +9,7 @@ module Api
         if user
           render json: { token: JsonWebToken.encode(user_id: user.id), user: user_json(user) }
         else
-          render json: { errors: [ "Invalid email or password" ] }, status: :unauthorized
+          render_errors("Invalid email or password", :unauthorized)
         end
       end
 

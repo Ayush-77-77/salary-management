@@ -70,6 +70,7 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include AuthHelpers, type: :request
+  config.include QueryCounter
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
