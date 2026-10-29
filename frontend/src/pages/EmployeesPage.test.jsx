@@ -62,7 +62,7 @@ describe('EmployeesPage', () => {
     renderPage()
 
     expect(await screen.findByText('Asha Rao')).toBeInTheDocument()
-    expect(screen.getByText('₹2,400,000')).toBeInTheDocument()
+    expect(screen.getByText('INR 2,400,000')).toBeInTheDocument()
     expect(screen.getByText('1 Mar 2021')).toBeInTheDocument()
     expect(screen.getByText('1 employees')).toBeInTheDocument()
   })
