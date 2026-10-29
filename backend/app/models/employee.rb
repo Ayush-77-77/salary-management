@@ -4,6 +4,9 @@ class Employee < ApplicationRecord
 
   delegate :currency, to: :country
 
+  paginates_per 25
+  max_paginates_per 100
+
   normalizes :full_name, :job_title, with: ->(value) { value.squish }
   normalizes :email, with: ->(email) { email.strip.downcase }
 
@@ -11,6 +14,18 @@ class Employee < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :salary, presence: true, numericality: { greater_than: 0 }
   validate :hire_date_not_in_future
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[full_name email job_title country_id department_id]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    []
+  end
+
+  def self.ransortable_attributes(_auth_object = nil)
+    %w[full_name salary hire_date]
+  end
 
   private
 
